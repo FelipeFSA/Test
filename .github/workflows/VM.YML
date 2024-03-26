@@ -1,0 +1,25 @@
+name: Deploy Azure VM
+
+on:
+  push:
+    branches: [ main ]  # Replace 'main' with your desired branch(es)
+  pull_request:  # Runs on pull request events
+
+jobs:
+  deploy-vm:
+    runs-on: ubuntu-latest  # You can choose a different runner OS if needed
+    steps:
+      - uses: actions/checkout@v3  # Checks out your code from GitHub
+
+      - name: Login to Azure using service principal
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_SECRET: ${{ secrets.AZURE_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          # Script to login to Azure using provided credentials (replace with yours)
+          # ... (Paste your provided PowerShell script here) ...
+
+      - name: Run PowerShell Script
+        run: powershell ./path/to/script.ps1  # Replace with actual script path
